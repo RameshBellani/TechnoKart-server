@@ -26,3 +26,8 @@ exports.createComment = async (req, res) => {
     res.status(400).send(err);
   }
 };
+
+exports.getCommentsByPost = async (req, res) => {
+  const comments = await Comment.findAll({ where: { postId: req.params.postId }, include: ['author'] });
+  res.send(comments);
+};
